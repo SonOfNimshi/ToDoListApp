@@ -1,0 +1,110 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+header{
+    width: 100%;
+    height: 90px;
+    background-color: #e74c3c;
+    position: fixed;
+    padding-left: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 15px black;
+}
+
+#newItem{
+    width: 90%;
+    height: 45px;
+    float:left;
+    border-radius: 5px;
+    border-top-right-radius: 45px;
+    border-bottom-right-radius: 45px;
+    font-size: 1.5em;
+    background-color: rgba(255, 255, 255, 0.25);
+    padding-left: 15px;
+    padding-right: 55px;
+    color: rgba(236, 240, 241,0.95);
+
+    outline:none;
+    border:none;
+    -webkit-border-before-style: none;
+    box-shadow:none;
+}
+
+#newItem::placeholder{
+    color: rgba(236, 240, 241,0.5);
+
+}
+
+#addItem{
+    transform: translate(-100%, 0);
+    cursor: pointer;
+    color: rgba(236, 240, 241,0.9);
+    font-size: 17pt;
+
+    border-radius: 45px;
+    outline:none;
+    border:none;
+    background-color: green;
+    -webkit-border-before-style: none;
+    box-shadow: none;
+    height: 45px;
+    width: 45px;
+}
+
+#container{
+    padding-top: 110px;
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: calc(100vh - 110px);
+    background-color: rgba(231, 76, 60,0.1);
+    align-items: center;
+}
+
+#seperator{
+    width: 75%;
+    border-bottom: solid 1px black;
+    height: 0px;
+}
+
+#container ul li{
+    height: 55px;
+    width: 90vw;
+    border-radius: 12px;
+    background-color: rgba(231, 76, 60,0.3);
+    margin: 10px 0;
+    padding: 0 0 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    -moz-box-shadow:0 5px 5px rgba(182, 182, 182, 0.75);
+    -webkit-box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+    box-shadow: 0 5px 5px rgba(182, 182, 182, 0.75);
+}
+
+#container ul li span{
+    font-weight: 700;
+}
+
+#container ul li div{
+    margin-left: auto;
+    padding-right: 15px;
+    font-size: 1.75em;
+    cursor: pointer;
+}
+
+#container ul li div svg.delete:hover{
+    color: rgba(255, 0, 0, 1);
+}
+
+#container #completed li div svg.check{
+    color: rgba(46, 204, 113,1.0);
+}
+
+#container ul li div svg.check:hover{
+    color: rgba(46, 204, 113, 0.3);
+}
