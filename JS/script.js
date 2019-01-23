@@ -1,23 +1,27 @@
 
-var uncompletedItems = [];
-var completedItems = [];
+var data = {
+    uncompletedItems: [],
+    completedItems: []
+};
 
 document.getElementById("addItem").addEventListener("click", function(){
     var value = document.getElementById("newItem").value;
     if (value)
     {
-    uncompletedItems.push(value);
-    DisplayItem(value, false);
-    document.getElementById("newItem"). value = '';
+        console.log(value);
+        console.log(data.uncompletedItems.push(value));
+        console.log(data.uncompletedItems);
+        DisplayItem(value, false);
+        document.getElementById("newItem").value = '';
     }
 });
 document.getElementById("newItem").addEventListener("keydown", function(e){
     var value = this.value;
     if(e.code === "Enter" && value)
     {
-        uncompletedItems.push(value);
+        data.uncompletedItems.push(value);
         DisplayItem(value, false);
-        document.getElementById("newItem"). value = '';
+        document.getElementById("newItem").value = '';
     }
 })
 
@@ -33,6 +37,7 @@ function DisplayItem(item, comp){
         var text = document.createTextNode(item);
         span.appendChild(text);
         li.appendChild(span);
+
 
         // icons
         var imgDiv = document.createElement("div");
@@ -66,6 +71,7 @@ function DisplayItem(item, comp){
         span.appendChild(text);
         li.appendChild(span);
 
+
         // icons
         var imgDiv = document.createElement("div");
         var del = document.createElement("svg");
@@ -93,16 +99,23 @@ function DisplayItem(item, comp){
 function checkClicked(){
     var item = this.parentNode.parentNode;
     var parent = item.parentNode;
+    var value = item.children[0].innerHTML;
 
     if(parent.id === "uncompleted")
     {
+        data.uncompletedItems.splice(data.uncompletedItems.indexOf(value), 1);
+        data.completedItems.push(value);
         DisplayItem(item.children[0].innerHTML, true);
         parent.removeChild(item);
+        console.log(data);
     }
     else
     {
+        data.completedItems.splice(data.completedItems.indexOf(value), 1);
+        data.uncompletedItems.push(value);
         DisplayItem(item.children[0].innerHTML, false);
         parent.removeChild(item);
+        console.log(data);
     }
 }
 
