@@ -1,16 +1,17 @@
 
-var data = {
+var data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem('todoList')):{
     uncompletedItems: [],
     completedItems: []
-};
+  };
+
+  RenderTodoList();
 
 document.getElementById("addItem").addEventListener("click", function(){
     var value = document.getElementById("newItem").value;
     if (value)
     {
-        console.log(value);
-        console.log(data.uncompletedItems.push(value));
-        console.log(data.uncompletedItems);
+        data.uncompletedItems.push(value);
+        localStorage.setItem('todoList', JSON.stringify(data));
         DisplayItem(value, false);
         document.getElementById("newItem").value = '';
     }
@@ -20,6 +21,7 @@ document.getElementById("newItem").addEventListener("keydown", function(e){
     if(e.code === "Enter" && value)
     {
         data.uncompletedItems.push(value);
+        localStorage.setItem('todoList', JSON.stringify(data));
         DisplayItem(value, false);
         document.getElementById("newItem").value = '';
     }
@@ -27,6 +29,20 @@ document.getElementById("newItem").addEventListener("keydown", function(e){
 
 
 // Functions
+
+function RenderTodoList() {
+    if (!data.uncompletedItems.length && !data.completedItems.length) return;
+  
+    for (var i = 0; i < data.uncompletedItems.length; i++) {
+      var value = data.uncompletedItems[i];
+      DisplayItem(value, false);
+    }
+  
+    for (var j = 0; j < data.completedItems.length; j++) {
+      var value = data.completedItems[j];
+      DisplayItem(value, true);
+    }
+  }
 
 function DisplayItem(item, comp){
     if(!comp){
@@ -105,22 +121,34 @@ function checkClicked(){
     {
         data.uncompletedItems.splice(data.uncompletedItems.indexOf(value), 1);
         data.completedItems.push(value);
+        localStorage.setItem('todoList', JSON.stringify(data));
         DisplayItem(item.children[0].innerHTML, true);
         parent.removeChild(item);
-        console.log(data);
     }
     else
     {
         data.completedItems.splice(data.completedItems.indexOf(value), 1);
         data.uncompletedItems.push(value);
+        localStorage.setItem('todoList', JSON.stringify(data));
         DisplayItem(item.children[0].innerHTML, false);
         parent.removeChild(item);
-        console.log(data);
     }
 }
 
 function deleteClicked(){
     var item = this.parentNode.parentNode;
     var parent = item.parentNode
+    var value = item.children[0].innerHTML;
     parent.removeChild(item);
+
+    if(parent.id === "uncompleted")
+    {
+        data.uncompletedItems.splice(data.uncompletedItems.indexOf(value), 1);
+        localStorage.setItem('todoList', JSON.stringify(data));
+    }
+    else
+    {
+        data.completedItems.splice(data.completedItems.indexOf(value), 1);
+        localStorage.setItem('todoList', JSON.stringify(data));
+    }
 }
