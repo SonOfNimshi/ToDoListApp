@@ -4,7 +4,7 @@ var data = (localStorage.getItem('todoList')) ? JSON.parse(localStorage.getItem(
     completedItems: []
   };
 
-  RenderTodoList();
+  InitialRenderTodoList();
 
 document.getElementById("addItem").addEventListener("click", function(){
     var value = document.getElementById("newItem").value;
@@ -30,7 +30,7 @@ document.getElementById("newItem").addEventListener("keydown", function(e){
 
 // Functions
 
-function RenderTodoList() {
+function InitialRenderTodoList() {
     if (!data.uncompletedItems.length && !data.completedItems.length) return;
   
     for (var i = 0; i < data.uncompletedItems.length; i++) {
